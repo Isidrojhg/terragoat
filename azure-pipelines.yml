@@ -34,6 +34,8 @@ jobs:
   - script: checkov -d . --use-enforcement-rules --bc-api-key $(prisma-access-key)::$(prisma-secret-key) --repo-id prismaiac/bicepgoat --branch main -o cli -o junitxml --output-file-path console,CheckovReport.xml
     workingDirectory: $(System.DefaultWorkingDirectory)
     displayName: Run Checkov
+    env:
+       PRISMA_API_URL: api2.eu.prismacloud.io
   - task: PublishTestResults@2
     inputs:
       testResultsFormat: 'JUnit'
