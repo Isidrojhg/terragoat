@@ -12,9 +12,6 @@ pr:
 pool:
   vmImage: windows-latest
 
-variables:
-  PRISMA_API_URL: https://api.prismacloud.io
-
 jobs:
 - job: Prisma_Cloud_Job
   displayName: Prisma Cloud Job
