@@ -19,12 +19,22 @@ jobs:
 - job: Prisma_Cloud_Job
   displayName: Prisma Cloud Job
   steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'ACP' -Value '65001' -PropertyType String -Force;
+      New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'OEMCP' -Value '65001' -PropertyType String -Force;
+      New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'MACCP' -Value '65001' -PropertyType String -Force;
   - task: UsePythonVersion@0
     inputs:
       versionSpec: 3.8
     displayName: 'Use Python 3.8'
   - script: pip install checkov
     displayName: Install Checkov
+    env:
   - script: checkov -d . --use-enforcement-rules --bc-api-key $(prisma-access-key)::$(prisma-secret-key) --repo-id prismaiac/bicepgoat --branch main -o cli -o junitxml --output-file-path console,CheckovReport.xml
     workingDirectory: $(System.DefaultWorkingDirectory)
     displayName: Run Checkov
