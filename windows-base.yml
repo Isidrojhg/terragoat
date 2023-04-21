@@ -14,6 +14,7 @@ pool:
 
 variables:
   PRISMA_API_URL: https://api2.eu.prismacloud.io
+  SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
 jobs:
 - job: Prisma_Cloud_Job
@@ -27,7 +28,6 @@ jobs:
         New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'ACP' -Value '65001' -PropertyType String -Force;
         New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'OEMCP' -Value '65001' -PropertyType String -Force;
         New-ItemProperty -LiteralPath 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' -Name 'MACCP' -Value '65001' -PropertyType String -Force; 
-    env: SYSTEM_ACCESSTOKEN: $(System.AccessToken)
   - task: UsePythonVersion@0
     inputs:
       versionSpec: 3.9
