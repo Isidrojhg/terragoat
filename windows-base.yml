@@ -19,8 +19,8 @@ jobs:
 - job: Prisma_Cloud_Job
   displayName: Prisma Cloud Job
   steps:
-   - task: PowerShell@2
-     inputs:
+  - task: PowerShell@2
+    inputs:
       targetType: 'inline'
       script: |
         # Write your PowerShell commands here.
