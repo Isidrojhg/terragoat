@@ -31,6 +31,7 @@ jobs:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: 3.10
+      ignoreLASTEXITCODE: true
     displayName: 'Use Python 3.10'
   - script: pip install checkov
     displayName: Install Checkov
